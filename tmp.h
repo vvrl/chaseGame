@@ -30,22 +30,14 @@ ostream& operator<<(ostream& out, const Predator& p) {
 
 
 
-class Arena {
-    int l, w;
-    Prey* prey;
-    Predator* predator;
-public:
-    Arena(int w, int l, Prey* prey, Predator* predator) {
-        this->l = l;
-        this->w = w;
-        this->prey = prey;
-        this->predator = predator;
-    }
-    friend ostream& operator<<(ostream&, const Arena&);
-    friend void Prey::AutoMove(const Arena& a, int z);
-    friend void Predator::AutoMove(const Arena& ar, int z);
 
-};
+
+
+
+
+
+
+
 
 ostream& operator<<(ostream& out, const Arena& a) {
     cout << "\033[2J\033[1;1H";
@@ -111,72 +103,11 @@ ostream& operator<<(ostream& out, const Arena& a) {
     return out;
 }
 
-void Prey::AutoMove(const Arena& a, int z) {
-    int q;
-    if (z == 1) {
-        q = rand() % 8;
-    }
-    else {
-        cout << "Куда идти?\n0-вверх-влево 1-вверх 2-вверх-вправо 3-влево 4-вправо 5-вниз-влево 6-вниз 7-вниз-вправо" << endl;
-        cin >> q;
-    }
-    switch (q) {
-    case 0:
-        if (location.x != 1 && location.y != 1) {
-            location.x -= 1;
-            location.y -= 1;
-        }
-        else cout << "Выход за пределы" << endl;
-        break;
-    case 1:
-        if (location.y != 1) {
-            location.y -= 1;
-        }
-        else cout << "Выход за пределы" << endl;
-        break;
-    case 2:
-        if (location.x != a.w && location.y != 1) {
-            location.x += 1;
-            location.y -= 1;
-        }
-        else cout << "Выход за пределы" << endl;
-        break;
-    case 3:
-        if (location.x != 1) {
-            location.x -= 1;
-        }
-        else cout << "Выход за пределы" << endl;
-        break;
-    case 4:
-        if (location.x != a.w) {
-            location.x += 1;
-        }
-        else cout << "Выход за пределы" << endl;
-        break;
-    case 5:
-        if (location.x != 1 && location.y != a.l) {
-            location.x -= 1;
-            location.y += 1;
-        }
-        else cout << "Выход за пределы" << endl;
-        break;
-    case 6:
-        if (location.y != a.l) {
-            location.y += 1;
-        }
-        else cout << "Выход за пределы" << endl;
-        break;
-    case 7:
-        if (location.x != a.w && location.y != a.l) {
-            location.x += 1;
-            location.y += 1;
-        }
-        else cout << "Выход за пределы" << endl;
-        break;
-    default:
-        break;
-    }
-}
+
+
+
+
+
 
 void Predator::AutoMove(const Arena& ar, int z) {
     int q;
@@ -225,7 +156,11 @@ void Predator::AutoMove(const Arena& ar, int z) {
     }
 }
 
-bool check(const Prey& prey, const Predator& predator) {
+
+
+
+bool check (const Prey& prey, const Predator& predator) {
+    
     if (prey.location.x == predator.location.x && abs(prey.location.y - predator.location.y) <= 5) {
         return 1;
     }
@@ -234,7 +169,15 @@ bool check(const Prey& prey, const Predator& predator) {
     }
     else return 0;
 }
-bool check1(const Prey& prey, const Predator& predator) {
+
+
+
+
+
+
+
+
+bool check1 (const Prey& prey, const Predator& predator) {
     if ((prey.location.x == predator.location.x) && (prey.location.y == predator.location.y)) return 1;
     else return 0;
 }
