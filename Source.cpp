@@ -26,9 +26,12 @@ int main() {
     cout << arena << endl;
 
     while (1) {
+        
         if (z == 0) {
             if (check(prey, predator)) {
+                
                 predator.MoveTo(prey.getx(), prey.gety());
+                
                 cout << arena;
                 cout << "\n!!!!!! ХИЩНИК ПОБЕДИЛ !!!!!!" << endl;
                 return 0;
@@ -39,6 +42,7 @@ int main() {
                 cout << arena << endl;
             }
         }
+        
         else {
             if (check1(prey, predator)) {
                 cout << "\n!!!!!! ХИЩНИК ПОБЕДИЛ !!!!!!" << endl;
