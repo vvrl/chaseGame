@@ -4,6 +4,8 @@
 #include <iomanip>
 #include <fstream>
 
+#include "Point2D.h"
+
 class Prey;
 class Predator;
 class Arena;
@@ -11,68 +13,59 @@ class Arena;
 using namespace std;
 
 
-class Point2D {
+class Character {
+
 private:
-    friend class Prey;
-    friend Predator;
-    friend class Arena;
-    friend ostream& operator<<(ostream&, const Arena&);
-    friend bool check(const Prey& prey, const Predator& predator);
-    friend bool check1(const Prey& prey, const Predator& predator);
-    int x;
-    int y;
+
+    string name;
+    string role;
+    Point2D location;
+
 public:
 
-    // Конструктор
-    Point2D(int x = 0, int y = 0) : x(x), y(y) {  }
+    Character(const std::string& name, const Point2D& location) 
+        : name(name), location(location), role("no role") {   }
 
-    // Перегрузка оператора вывода
-    friend std::ostream& operator<<(std::ostream& out, const Point2D& point) {
-        out << "(" << point.x << ", " << point.y << ")";
-        return out;
+    void MoveTo(int x, int y) {
+        location.setPoint(x, y);
     }
 
-    void setPoint(int x, int y) {
-        this->x = x;
-        this->y = y;
+    Point2D getLocation() {
+        return location;
     }
-    bool operator==(const Point2D& point) {
-        if (x == point.x && y == point.y) return 1;
-        else return 0;
-    }
+
+    //ostream& operator<<(ostream& out, const Character& p) {
+    //    out << "Имя персонажа - " << p.name << "Координаты персонажа - " << p.location << endl;
+    //    return out;
+    //}
+  
 };
 
-class Prey {
+
+
+class Prey : Character {
     friend ostream& operator<<(ostream&, const Arena&);
 private:
     friend Predator;
     friend class Arena;
+    
+    
     std::string name;
     Point2D location;
 
 public:
     Prey(const std::string& name, const Point2D& location) : name(name), location(location) {   }
 
-    void MoveTo(int x, int y) {
-        location.setPoint(x, y);
-    }
+
 
     void AutoMove(const Arena&, int z);
 
     friend ostream& operator<<(ostream& out, const Prey&);
     friend bool check(const Prey& prey, const Predator& predator);
     friend bool check1(const Prey& prey, const Predator& predator);
-    int getx() {
-        return location.x;
-    }
-    int gety() {
-        return location.y;
-    }
+
 };
-ostream& operator<<(ostream& out, const Prey& p) {
-    out << "Имя жертвы - " << p.name << "Координаты жертвы - " << p.location << endl;
-    return out;
-}
+
 
 class Predator {
 private:
@@ -97,6 +90,9 @@ ostream& operator<<(ostream& out, const Predator& p) {
     out << "Имя хищника - " << p.name << "\nКоординаты хищника - " << p.location << endl;
     return out;
 }
+
+
+
 
 class Arena {
     int l, w;
