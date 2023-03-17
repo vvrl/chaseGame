@@ -6,9 +6,9 @@ class Character {
 
 private:
 
-    string name;
-    Point2D location;
-    bool npc;
+    string name;        // имя персонажа
+    Point2D location;   // текущее положение персонажа
+    bool npc;           // признак NPC
 
 public:
 
@@ -17,7 +17,7 @@ public:
 
     //0 - вверх 1 - вправо 2 - вниз 3 - влево 4 - вверх-влево 
     //5 - вверх-вправо 6 - вниз-вправо 7 - вниз-влево
-    void MoveTo(int direction, int steps) {
+    void moveTo(int direction, int steps) {
         
         int deltaX(0), deltaY(0);
 
@@ -64,14 +64,13 @@ public:
 
     bool isNPC() { return npc; }
 
-    virtual void AutoMove() = 0;
+    virtual void autoMove() = 0; 
 
     //ostream& operator<<(ostream& out, const Character& p) {
     //    out << "Имя персонажа - " << p.name << "Координаты персонажа - " << p.location << endl;
     //    return out;
     //}
 };
-
 
 class Prey : Character {
 
@@ -81,12 +80,34 @@ private:
     //friend Predator;
     //friend class Arena;
 
-    const int range = 1;
+    const int maxRange = 1;
 
 public:
+
     Prey(const std::string& name, const Point2D& location, bool npcFlag = 0) : Character(name, location, npcFlag) {   }
 
-    void AutoMove() override;
+    int askDirection() {
+        int direction (0);
+        cout << "Куда идти?" << endl;
+        cout << "0 - вверх, 1 - вправо, 2 - вниз, 3 - влево," << endl;
+        cout << "4 - вверх - влево, 5 - вверх-вправо, 6 - вниз-вправо, 7 - вниз-влево" << endl;
+        cin >> direction;
+        //TODO: проверка корректности ввода
+    }
+
+    void autoMove() override {
+
+        int direction = 0;
+
+        if (isNPC()) {
+            direction = rand() % 8;
+        }
+        else {
+            direction = askDirection();
+        }
+
+        moveTo(direction, maxRange);
+    }
 
     //friend ostream& operator<<(ostream& out, const Prey&);
     //friend bool check(const Prey& prey, const Predator& predator);
@@ -94,94 +115,60 @@ public:
 
 };
 
-
-
 class Predator : Character{
 private:
     //friend Prey;
     //friend class Arena;
     //friend ostream& operator<<(ostream&, const Arena&);
 
-    int range;
-
+    const int maxRange = 5;
+ 
 public:
     Predator(const std::string& name, const Point2D& location, bool npcFlag = 0) 
-        : Character(name, location, npcFlag), range(0) {   }
+        : Character(name, location, npcFlag) {   }
 
+    int askRange() {
 
-    void AskRange() {
         do {
+            int range;
             cout << "На сколько? (1-5)" << endl;
             cin >> range;
-            if (1 <= range && range <= 5) break;
+
+            if (range >= 1 && range <= maxRange) {
+                return range;     
+            }
+            else cout << "Некорректный ввод, попробуй ещё раз " << endl;
+
         } while (true);
     }
 
-    void AutoMove();
+    int askDirection() {
+        int direction(0);
+        cout << "Куда идти?" << endl;
+        cout << "0 - вверх, 1 - вправо, 2 - вниз, 3 - влево," << endl;
+        cin >> direction;
+        //TODO: проверка корректности ввода
+    }
+
+    void autoMove() override {
+
+        int direction = 0;
+        int range = 0;
+
+        if (isNPC()) {
+            direction = rand() % 4;
+            range = rand() % 5 + 1;
+        }
+        else {
+
+            direction = askDirection();
+            range = askRange();
+        }
+
+        moveTo(direction, range);
+    }
 
     //friend ostream& operator<<(ostream&, const Predator&);
     //friend bool check(const Prey& prey, const Predator& predator);
     //friend bool check1(const Prey& prey, const Predator& predator);
 };
-
-
-
-
-void Prey::AutoMove() {
-    
-    int direction;
-
-    if (isNPC()) {
-        direction = rand() % 8;        
-    }
-    else {
-        cout << "Куда идти?\n0-вверх-влево 1-вверх 2-вверх-вправо 3-влево 4-вправо 5-вниз-влево 6-вниз 7-вниз-вправо" << endl;
-        cin >> direction;
-    }
-    
-    MoveTo(direction, range);   
-}
-
-
-
-void Predator::AutoMove() {
-    
-    int direction;
-
-    if (isNPC()) {
-        direction = rand() % 4;
-        SetRange(rand() % 5 + 1);
-    }
-    else {
-        int s = 0;
-        cout << "Куда идти?\n0-вверх 1-вправо 2-вниз 3-влево" << endl;
-        cin >> direction;
-    }
-
-    switch (q) {
-    case 0:
-        if (location.y >= (a)) {
-            location.y -= a;
-        }
-        else cout << "Выход за пределы" << endl;
-        break;
-    case 1:
-        if (location.x <= (ar.w - a)) {
-            location.x += a;
-        }
-        else cout << "Выход за пределы" << endl;
-        break;
-    case 2:
-        if (location.y <= (ar.l - a)) {
-            location.y += a;
-        }
-        else cout << "Выход за пределы" << endl;
-        break;
-    case 3:
-        if (location.x >= (a)) {
-            location.x -= a;
-        }
-        else cout << "Выход за пределы" << endl;
-        break;
-    }
-}
