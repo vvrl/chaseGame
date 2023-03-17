@@ -1,4 +1,4 @@
-#pragma once
+п»ї#pragma once
 
 #include "Point2D.h"
 
@@ -6,17 +6,17 @@ class Character {
 
 private:
 
-    string name;        // имя персонажа
-    Point2D location;   // текущее положение персонажа
-    bool npc;           // признак NPC
+    string name;        // РёРјСЏ РїРµСЂСЃРѕРЅР°Р¶Р°
+    Point2D location;   // С‚РµРєСѓС‰РµРµ РїРѕР»РѕР¶РµРЅРёРµ РїРµСЂСЃРѕРЅР°Р¶Р°
+    bool npc;           // РїСЂРёР·РЅР°Рє NPC
 
 public:
 
     Character(const std::string& name, const Point2D& location, bool npcFlag = 0)
         : name(name), location(location), npc(npcFlag){   }
 
-    //0 - вверх 1 - вправо 2 - вниз 3 - влево 4 - вверх-влево 
-    //5 - вверх-вправо 6 - вниз-вправо 7 - вниз-влево
+    //0 - РІРІРµСЂС… 1 - РІРїСЂР°РІРѕ 2 - РІРЅРёР· 3 - РІР»РµРІРѕ 4 - РІРІРµСЂС…-РІР»РµРІРѕ 
+    //5 - РІРІРµСЂС…-РІРїСЂР°РІРѕ 6 - РІРЅРёР·-РІРїСЂР°РІРѕ 7 - РІРЅРёР·-РІР»РµРІРѕ
     void moveTo(int direction, int steps) {
         
         int deltaX(0), deltaY(0);
@@ -67,7 +67,7 @@ public:
     virtual void autoMove() = 0; 
 
     //ostream& operator<<(ostream& out, const Character& p) {
-    //    out << "Имя персонажа - " << p.name << "Координаты персонажа - " << p.location << endl;
+    //    out << "РРјСЏ РїРµСЂСЃРѕРЅР°Р¶Р° - " << p.name << "РљРѕРѕСЂРґРёРЅР°С‚С‹ РїРµСЂСЃРѕРЅР°Р¶Р° - " << p.location << endl;
     //    return out;
     //}
 };
@@ -88,11 +88,11 @@ public:
 
     int askDirection() {
         int direction (0);
-        cout << "Куда идти?" << endl;
-        cout << "0 - вверх, 1 - вправо, 2 - вниз, 3 - влево," << endl;
-        cout << "4 - вверх - влево, 5 - вверх-вправо, 6 - вниз-вправо, 7 - вниз-влево" << endl;
+        cout << "РљСѓРґР° РёРґС‚Рё?" << endl;
+        cout << "0 - РІРІРµСЂС…, 1 - РІРїСЂР°РІРѕ, 2 - РІРЅРёР·, 3 - РІР»РµРІРѕ," << endl;
+        cout << "4 - РІРІРµСЂС… - РІР»РµРІРѕ, 5 - РІРІРµСЂС…-РІРїСЂР°РІРѕ, 6 - РІРЅРёР·-РІРїСЂР°РІРѕ, 7 - РІРЅРёР·-РІР»РµРІРѕ" << endl;
         cin >> direction;
-        //TODO: проверка корректности ввода
+        //TODO: РїСЂРѕРІРµСЂРєР° РєРѕСЂСЂРµРєС‚РЅРѕСЃС‚Рё РІРІРѕРґР°
     }
 
     void autoMove() override {
@@ -131,23 +131,23 @@ public:
 
         do {
             int range;
-            cout << "На сколько? (1-5)" << endl;
+            cout << "РќР° СЃРєРѕР»СЊРєРѕ? (1-5)" << endl;
             cin >> range;
 
             if (range >= 1 && range <= maxRange) {
                 return range;     
             }
-            else cout << "Некорректный ввод, попробуй ещё раз " << endl;
+            else cout << "РќРµРєРѕСЂСЂРµРєС‚РЅС‹Р№ РІРІРѕРґ, РїРѕРїСЂРѕР±СѓР№ РµС‰С‘ СЂР°Р· " << endl;
 
         } while (true);
     }
 
     int askDirection() {
         int direction(0);
-        cout << "Куда идти?" << endl;
-        cout << "0 - вверх, 1 - вправо, 2 - вниз, 3 - влево," << endl;
+        cout << "РљСѓРґР° РёРґС‚Рё?" << endl;
+        cout << "0 - РІРІРµСЂС…, 1 - РІРїСЂР°РІРѕ, 2 - РІРЅРёР·, 3 - РІР»РµРІРѕ," << endl;
         cin >> direction;
-        //TODO: проверка корректности ввода
+        //TODO: РїСЂРѕРІРµСЂРєР° РєРѕСЂСЂРµРєС‚РЅРѕСЃС‚Рё РІРІРѕРґР°
     }
 
     void autoMove() override {

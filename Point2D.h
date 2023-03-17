@@ -1,4 +1,4 @@
-#pragma once
+п»ї#pragma once
 #include <iostream>
 using namespace std;
 
@@ -14,7 +14,7 @@ private:
     int y;
 public:
 
-    // Конструктор
+    // РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ
     Point2D(int x = 0, int y = 0) : x(x), y(y) {  }
 
     void setPoint(int x, int y) {
@@ -30,7 +30,7 @@ public:
         else return 0;
     }
 
-    // Перегрузка оператора вывода
+    // РџРµСЂРµРіСЂСѓР·РєР° РѕРїРµСЂР°С‚РѕСЂР° РІС‹РІРѕРґР°
     friend std::ostream& operator<<(std::ostream& out, const Point2D& point) {
         out << "(" << point.x << ", " << point.y << ")";
         return out;

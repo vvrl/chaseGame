@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include <iostream>
 #include <string>
 #include <iomanip>
@@ -23,7 +23,7 @@ using namespace std;
 
 
 ostream& operator<<(ostream& out, const Predator& p) {
-    out << "Èìÿ õèùíèêà - " << p.name << "\nÊîîðäèíàòû õèùíèêà - " << p.location << endl;
+    out << "Ð˜Ð¼Ñ Ñ…Ð¸Ñ‰Ð½Ð¸ÐºÐ° - " << p.name << "\nÐšÐ¾Ð¾Ñ€Ð´Ð¸Ð½Ð°Ñ‚Ñ‹ Ñ…Ð¸Ñ‰Ð½Ð¸ÐºÐ° - " << p.location << endl;
     return out;
 }
 
@@ -54,11 +54,11 @@ ostream& operator<<(ostream& out, const Arena& a) {
                 for (int j = 1; j < a.predator->location.x; j++) {
                     cout << "  ";
                 }
-                cout << "Õ ";
+                cout << "Ð¥ ";
                 for (int j = a.predator->location.x + 1; j < a.prey->location.x; j++) {
                     cout << "  ";
                 }
-                cout << "Æ ";
+                cout << "Ð– ";
                 for (int j = a.prey->location.x + 1; j <= a.w; j++) {
                     cout << "  ";
                 }
@@ -67,29 +67,29 @@ ostream& operator<<(ostream& out, const Arena& a) {
                 for (int j = 1; j < a.prey->location.x; j++) {
                     cout << "  ";
                 }
-                cout << "Æ ";
+                cout << "Ð– ";
                 for (int j = a.prey->location.x + 1; j < a.predator->location.x; j++) {
                     cout << "  ";
                 }
-                cout << "Õ ";
+                cout << "Ð¥ ";
                 for (int j = a.predator->location.x + 1; j <= a.w; j++) {
                     cout << "  ";
                 }
             }
             else if (a.predator->location.x == a.prey->location.x) {
                 for (int j = 1; j < a.predator->location.x; j++) cout << "  ";
-                cout << "Õ ";
+                cout << "Ð¥ ";
                 for (int j = a.predator->location.x; j < a.w; j++) cout << "  ";
             }
         }
         else if (a.prey->location.y == i + 1) {
             for (int j = 1; j < a.prey->location.x; j++) cout << "  ";
-            cout << "Æ ";
+            cout << "Ð– ";
             for (int j = a.prey->location.x; j < a.w; j++) cout << "  ";
         }
         else if (a.predator->location.y == i + 1) {
             for (int j = 1; j < a.predator->location.x; j++) cout << "  ";
-            cout << "Õ ";
+            cout << "Ð¥ ";
             for (int j = a.predator->location.x; j < a.w; j++) cout << "  ";
         }
         else if (a.prey->location.y != i + 1 && a.predator->location.y != i + 1) {
@@ -118,11 +118,11 @@ void Predator::AutoMove(const Arena& ar, int z) {
     }
     else {
         int s = 0;
-        cout << "Êóäà èäòè?\n0-ââåðõ 1-âïðàâî 2-âíèç 3-âëåâî" << endl;
+        cout << "ÐšÑƒÐ´Ð° Ð¸Ð´Ñ‚Ð¸?\n0-Ð²Ð²ÐµÑ€Ñ… 1-Ð²Ð¿Ñ€Ð°Ð²Ð¾ 2-Ð²Ð½Ð¸Ð· 3-Ð²Ð»ÐµÐ²Ð¾" << endl;
         cin >> q;
 
         do {
-            cout << "Íà ñêîëüêî? (1-5)" << endl;
+            cout << "ÐÐ° ÑÐºÐ¾Ð»ÑŒÐºÐ¾? (1-5)" << endl;
             cin >> a;
             if (1 <= a && a <= 5) s = 1;
         } while (s != 1);
@@ -133,25 +133,25 @@ void Predator::AutoMove(const Arena& ar, int z) {
         if (location.y >= (a)) {
             location.y -= a;
         }
-        else cout << "Âûõîä çà ïðåäåëû" << endl;
+        else cout << "Ð’Ñ‹Ñ…Ð¾Ð´ Ð·Ð° Ð¿Ñ€ÐµÐ´ÐµÐ»Ñ‹" << endl;
         break;
     case 1:
         if (location.x <= (ar.w - a)) {
             location.x += a;
         }
-        else cout << "Âûõîä çà ïðåäåëû" << endl;
+        else cout << "Ð’Ñ‹Ñ…Ð¾Ð´ Ð·Ð° Ð¿Ñ€ÐµÐ´ÐµÐ»Ñ‹" << endl;
         break;
     case 2:
         if (location.y <= (ar.l - a)) {
             location.y += a;
         }
-        else cout << "Âûõîä çà ïðåäåëû" << endl;
+        else cout << "Ð’Ñ‹Ñ…Ð¾Ð´ Ð·Ð° Ð¿Ñ€ÐµÐ´ÐµÐ»Ñ‹" << endl;
         break;
     case 3:
         if (location.x >= (a)) {
             location.x -= a;
         }
-        else cout << "Âûõîä çà ïðåäåëû" << endl;
+        else cout << "Ð’Ñ‹Ñ…Ð¾Ð´ Ð·Ð° Ð¿Ñ€ÐµÐ´ÐµÐ»Ñ‹" << endl;
         break;
     }
 }
