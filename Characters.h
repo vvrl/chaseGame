@@ -87,12 +87,22 @@ public:
     Prey(const std::string& name, const Point2D& location, bool npcFlag = 0) : Character(name, location, npcFlag) {   }
 
     int askDirection() {
-        int direction (0);
-        cout << "Куда идти?" << endl;
-        cout << "0 - вверх, 1 - вправо, 2 - вниз, 3 - влево," << endl;
-        cout << "4 - вверх - влево, 5 - вверх-вправо, 6 - вниз-вправо, 7 - вниз-влево" << endl;
-        cin >> direction;
-        //TODO: проверка корректности ввода
+
+        do {
+
+            int direction(0);
+            cout << "Куда идти?" << endl;
+            cout << "0 - вверх, 1 - вправо, 2 - вниз, 3 - влево," << endl;
+            cout << "4 - вверх - влево, 5 - вверх-вправо, 6 - вниз-вправо, 7 - вниз-влево" << endl;
+            cin >> direction;
+
+            if (direction <= 7 && direction>=0) {
+                return direction;
+            }
+            else cout << "Некорректный ввод, попробуй ещё раз " << endl;
+
+        } while (true);
+
     }
 
     void autoMove() override {
@@ -143,11 +153,20 @@ public:
     }
 
     int askDirection() {
-        int direction(0);
-        cout << "Куда идти?" << endl;
-        cout << "0 - вверх, 1 - вправо, 2 - вниз, 3 - влево," << endl;
-        cin >> direction;
-        //TODO: проверка корректности ввода
+        do {
+
+            int direction(0);
+            cout << "Куда идти?" << endl;
+            cout << "0 - вверх, 1 - вправо, 2 - вниз, 3 - влево," << endl;
+            cin >> direction;
+
+            if (direction <= 3 && direction >= 0) {
+                return direction;
+            }
+            else cout << "Некорректный ввод, попробуй ещё раз " << endl;
+
+        } while (true);       
+
     }
 
     void autoMove() override {
@@ -160,7 +179,6 @@ public:
             range = rand() % 5 + 1;
         }
         else {
-
             direction = askDirection();
             range = askRange();
         }
