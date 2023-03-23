@@ -5,6 +5,7 @@
 #include <time.h>
 
 #include "Characters.h"
+#include "Arena.h"
 
 using namespace std;
 
@@ -15,25 +16,30 @@ int main() {
     srand(time(NULL));
 
 
-    string prey_name, predator_name;
-    int sideChoice;
-    
-    cout << "Enter a name for your prey: ";    
-    cin >> prey_name;
-    cout << "Enter a name for your predator: ";
-    cin >> predator_name;
-    
-    cout << "За кого хотите играть? (0-жертва, 1-хищник)" << endl;
-    cin >> sideChoice;
+    Prey prey("prey", Point2D(1, 1), true);
+    Predator predator("predator", Point2D(1, 1), false);
 
-    bool preyNpc = true;
-    if (sideChoice == 0) preyNpc = false;
+    Arena arena(80, 80, &prey, &predator);
 
-    Prey prey(prey_name, Point2D(1, 1), preyNpc);
-    Predator predator(predator_name, Point2D(7, 1), !preyNpc);
+    cout << arena;
 
-    prey.autoMove();
-    predator.autoMove();
+    //
+    //cout << "Enter a name for your prey: ";    
+    //cin >> prey_name;
+    //cout << "Enter a name for your predator: ";
+    //cin >> predator_name;
+    //
+    //cout << "За кого хотите играть? (0-жертва, 1-хищник)" << endl;
+    //cin >> sideChoice;
+
+    //bool preyNpc = true;
+    //if (sideChoice == 0) preyNpc = false;
+
+    //Prey prey(prey_name, Point2D(1, 1), preyNpc);
+    //Predator predator(predator_name, Point2D(7, 1), !preyNpc);
+
+    //prey.autoMove();
+    //predator.autoMove();
 
 
     //Arena arena(10, 10, &prey, &predator);
