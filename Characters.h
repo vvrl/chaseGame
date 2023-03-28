@@ -72,7 +72,7 @@ public:
     //}
 };
 
-class Prey : Character {
+class Prey : public Character {
 
 private:
 
@@ -125,7 +125,7 @@ public:
 
 };
 
-class Predator : Character{
+class Predator : public Character{
 private:
     //friend Prey;
     //friend class Arena;

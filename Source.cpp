@@ -16,10 +16,10 @@ int main() {
     srand(time(NULL));
 
 
-    Prey prey("prey", Point2D(1, 1), true);
+    Prey prey("prey", Point2D(3, 10), true);
     Predator predator("predator", Point2D(1, 1), false);
 
-    Arena arena(80, 80, &prey, &predator);
+    Arena arena(20, 20, &prey, &predator);
 
     cout << arena;
 
