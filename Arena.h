@@ -14,74 +14,102 @@ class Arena {
 
 public:
 
-    Arena(int w, int l, Prey* prey, Predator* predator) {
+    Arena(int l, int w, Prey* prey, Predator* predator) {
         //TODO: Проверка диапазона l w от (1 до 99)       
-        this->length = l;
+        
+        // увеличение размера поля для постоянных символов (границы, координаты)
+        int shift_l = 3; 
+        int shift_w = 4; 
 
-        w = w * 2;
-
-        this->width = w;
+        w = w * 2;       // удвоим ширину поля (для симметрии клеток при отображении)
+        
+        length = l + shift_l;
+        width = w + shift_w;
         this->prey = prey;
         this->predator = predator;
+        
+        // Выделение памяти под массив field размером length x width
         field = new char* [l];
 
-        for (int i = 0; i < l ; i++)
-        {
-            field[i] = new char[w];
-
-            for (int j = 0; j < w; j++)
-            {
-                field[i][j] = ' ';
-            }
-        }
-
-        
-        for (int i = l-1; i >= 0; i--) {          
+        for (int i = 0; i < length ; i++) {
             
-            if (l - i > 9) {
-                int tmp = ((l - i) / 10);
-                field[i][0] = ((l - i) / 10) + '0';
-                field[i][1] = ((l - i) % 10) + '0';
-            }
-            else field[i][1] = l - i + '0';       
+            field[i] = new char [width];
 
-            field[i][2] = '|';
+            for (int j = 0; j < width; j++)
+            {
+                field[i][j] = '.';
+            }
         }
 
+        // Заполнение массива декоративными символами
 
+        // Верхняя и нижняя грань поля
+        for (int j = 2; j < width; j++) {
+            field[0][j] = '-';
+            field[length - 2][j] = '-';
 
+            // Нумерация снизу
+            int cell_num = (j / 2);
 
-
-        for (int i = 0; i < w; i++)
-        {
-            int cell_num = 1 + (i / 2);
+            if (j >= width - 2) continue;
 
             if (cell_num > 9) {
                 
-                if ((i + 1) % 2 == 0) {
-                    field[l - 1][i] = (cell_num % 10) + '0';
+                if ((j + 1) % 2 == 0) {
+                    field[length - 1][j+1] = (cell_num % 10) + '0';
                 }
-                else field[l - 1][i] = (cell_num / 10) + '0';
+                else field[length - 1][j+1] = (cell_num / 10) + '0';
                 
             }
             else {
-                if ( (i+1) % 2 == 0) {
-                    field[l - 1][i] = cell_num + '0';
+                if ( (j+1) % 2 == 0) {
+                    field[length - 1][j+1] = cell_num + '0';
                 }
-                else field[l - 1][i] = ' ';
+                else field[length - 1][j+1] = ' ';
             }
-
         }
 
-        for (int i = 3; i < w; i++)
-        {
-            field[l - 2][i] = '_';
+        // Левая и правая грань поля
+        for (int i = 1; i < length - 2; i++) {
+                       
+            field[i][2] = '|';
+            field[i][width - 1] = '|';
+        
+            // Нумерации слева            
+            int y_coords = length - shift_l + 1;
+            
+            if (y_coords - i > 9) {
+                int tmp = ((y_coords - i) / 10);
+                field[i][0] = ((y_coords - i) / 10) + '0';
+                field[i][1] = ((y_coords - i) % 10) + '0';
+            }
+            else field[i][1] = y_coords - i + '0';
         }
+    }
 
+    void clearStep() {
+        // Удаление жертвы
+        int preyX = (prey->getLocation().getX() * 2) + 2;
+        int preyY = prey->getLocation().getY() + 2;
+
+        field[length - preyY][preyX] = ' ';
+        field[length - preyY][preyX - 1] = ' ';
+
+        // Удаление хищника
+        int predX = (predator->getLocation().getX() * 2) + 2;
+        int predY = predator->getLocation().getY() + 2;
+
+        field[length - predY][predX] = ' ';
+        field[length - predY][predX - 1] = ' ';
     }
     
     ~Arena() {
-        delete [] field;
+        
+        //TODO: Проверить правильность освобождения памяти
+        for (int i = 0; i < length; i++) {
+
+            delete[] field[i];
+        }
     }
 
     //friend void Prey::AutoMove(const Arena& a, int z);
@@ -95,11 +123,20 @@ public:
 
 ostream& operator<<(ostream& out, const Arena& a) {
     
-    int preyX = (a.prey->getLocation().getX()*2)+3;
-
+    // Размещение жертвы
+    int preyX = (a.prey->getLocation().getX()*2)+2;
     int preyY = a.prey->getLocation().getY()+2;
 
-    a.field[a.length - preyY][preyX] = '^';
+    a.field[a.length - preyY][preyX] = ')';
+    a.field[a.length - preyY][preyX-1] = '(';
+
+    // Размещение хищника
+    int predX = (a.predator->getLocation().getX() * 2) + 2;
+    int predY = a.predator->getLocation().getY() + 2;
+
+    a.field[a.length - predY][predX] = '*';
+    a.field[a.length - predY][predX - 1] = '*';
+
 
     for (int i = 0; i < a.length; i++) {
         for (int j = 0; j < a.width; j++) {

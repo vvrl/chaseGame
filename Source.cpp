@@ -3,6 +3,7 @@
 #include <iomanip>
 #include <fstream>
 #include <time.h>
+#include <cstdlib>
 
 #include "Characters.h"
 #include "Arena.h"
@@ -15,13 +16,23 @@ int main() {
 
     srand(time(NULL));
 
+    Prey prey("prey", Point2D(5, 20), true);
+    Predator predator("predator", Point2D(3, 10), true);
 
-    Prey prey("prey", Point2D(3, 10), true);
-    Predator predator("predator", Point2D(1, 1), false);
+    Arena arena(30, 30, &prey, &predator);
 
-    Arena arena(20, 20, &prey, &predator);
+    for (int i = 0; i <= 20; i++) {
+        prey.autoMove();
+        predator.autoMove();
 
-    cout << arena;
+        cout << arena;
+         
+        system("timeout /t 1");
+        arena.clearStep();
+        system("cls");
+        
+    }
+    
 
     //
     //cout << "Enter a name for your prey: ";    
