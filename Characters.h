@@ -15,6 +15,10 @@ public:
     Character(const std::string& name, const Point2D& location, bool npcFlag = 0)
         : name(name), location(location), npc(npcFlag){   }
 
+    void moveTo(Point2D point) {
+        location = point;
+    }
+
     //0 - вверх 1 - вправо 2 - вниз 3 - влево 4 - вверх-влево 
     //5 - вверх-вправо 6 - вниз-вправо 7 - вниз-влево
     void moveTo(int direction, int steps) {

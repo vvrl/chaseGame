@@ -21,16 +21,29 @@ int main() {
 
     Arena arena(30, 30, &prey, &predator);
 
-    for (int i = 0; i <= 20; i++) {
+    cout << arena;
+
+    for (int i = 0; i <= 40; i++) {
+        arena.clearStep();
+
+        Point2D prevPreyLocation(prey.getLocation());
+        Point2D prevPredLocation(predator.getLocation());
+
         prey.autoMove();
         predator.autoMove();
 
+        if (arena.checkOverRun())
+        {
+            prey.moveTo(prevPreyLocation);
+            predator.moveTo(prevPredLocation);
+        }
+
+        
         cout << arena;
          
         system("timeout /t 1");
-        arena.clearStep();
-        system("cls");
         
+        system("cls");
     }
     
 
