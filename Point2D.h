@@ -1,15 +1,10 @@
 ﻿#pragma once
+
 #include <iostream>
-using namespace std;
+
 
 class Point2D {
 private:
-    //friend class Prey;
-    //friend Predator;
-    //friend class Arena;
-    //friend ostream& operator<<(ostream&, const Arena&);
-    //friend bool check(const Prey& prey, const Predator& predator);
-    //friend bool check1(const Prey& prey, const Predator& predator);
     int x;
     int y;
 public:

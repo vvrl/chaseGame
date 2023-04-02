@@ -15,7 +15,13 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Arena.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
     <ClCompile Include="Source.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Characters.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
@@ -23,13 +29,13 @@
     <ClInclude Include="tmp.h">
       <Filter>Исходные файлы</Filter>
     </ClInclude>
-    <ClInclude Include="Point2D.h">
+    <ClInclude Include="Arena.h">
       <Filter>Исходные файлы</Filter>
     </ClInclude>
     <ClInclude Include="Characters.h">
       <Filter>Исходные файлы</Filter>
     </ClInclude>
-    <ClInclude Include="Arena.h">
+    <ClInclude Include="Point2D.h">
       <Filter>Исходные файлы</Filter>
     </ClInclude>
   </ItemGroup>
