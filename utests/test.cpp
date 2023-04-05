@@ -1,33 +1,63 @@
 #include "pch.h"
-#include "../tmp.h"
+#include "../Point2D.h"
 
 
 
-TEST(TestCaseName, TestName) {
+TEST(TestPoint2D, TestConstuctor) {
+	int x[] = { -10, 67, 10, -1000, 0, 234412 };
+	int y[] = { -2, 217, 111, -1023, 0, 4412 };
 
-	Prey pr("Вася", Point2D(2, 5));
+	int x_size = sizeof(x) / sizeof(x[0]);
+	int y_size = sizeof(y) / sizeof(y[0]);
 
-	EXPECT_EQ(pr.getx(), 2);
-	EXPECT_EQ(pr.gety(), 5);
+	for (int i = 0; i < x_size-1 ; i++)
+	{
+		for (int j = 0; j < y_size-1; j++) {
 
-	pr.MoveTo(10, 55);
+			Point2D point(x[i], y[j]);
 
-	EXPECT_EQ(pr.getx(), 10);
-	EXPECT_EQ(pr.gety(), 55);
+			ASSERT_EQ(point.getX(), x[i]);
+			ASSERT_EQ(point.getY(), y[j]);
+		}
+	}
+
 }
 
-TEST(TestCaseName, TestName1) {
+TEST(TestPoint2D, TestEQcheck) {
+	
+	int x[] = { -10, 67, 10, -1000, 0, 234412 };
+	int y[] = { -2, 217, 111, -1023, 0, 4412 };
 
-	Prey pr("Вася", Point2D(2, 5));
+	int x_size = sizeof(x) / sizeof(x[0]);
+	int y_size = sizeof(y) / sizeof(y[0]);
 
-	EXPECT_EQ(pr.getx(), 2);
-	EXPECT_EQ(pr.gety(), 6);
+	for (int i = 0; i < x_size - 1; i++)
+	{
+		for (int j = 0; j < y_size - 1; j++) {
 
-	pr.MoveTo(10, 55);
+			Point2D point1(x[i], y[j]);
+			Point2D point2(x[i], y[j]);
 
-	EXPECT_EQ(pr.getx(), 10);
-	EXPECT_EQ(pr.gety(), 55);
+			ASSERT_TRUE(point1 == point2);
+
+			Point2D point3(x[i]+1, y[j]);
+			Point2D point4(x[i], y[j]);
+
+			ASSERT_FALSE(point3 == point4);
+
+			Point2D point5(x[i], y[j]);
+			Point2D point6(x[i], y[j]-1);
+
+			ASSERT_FALSE(point5 == point6);
+		}
+	}
 }
+
+TEST(TestPoint2D, TestOutStream) {
+
+
+}
+
 
 int main(int argc, char** argv) {
 	::testing::InitGoogleTest(&argc, argv);
