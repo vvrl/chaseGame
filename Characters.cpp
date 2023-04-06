@@ -1,5 +1,6 @@
 #include "Characters.h"
 
+
 using namespace std;
 
 Character::Character(const std::string& name, const Point2D& location, bool npcFlag)

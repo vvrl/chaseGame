@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32228.430
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Project1", "Project1.vcxproj", "{E9811141-1742-4BFF-9023-5B1062B34708}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ChaseGame", "Project1.vcxproj", "{E9811141-1742-4BFF-9023-5B1062B34708}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "utests", "utests\utests.vcxproj", "{F8B55D2D-029A-43A6-8589-602946C1DB81}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Элементы решения", "Элементы решения", "{64D4F0EB-C165-48C2-9756-A227FF7420C1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
