@@ -141,6 +141,8 @@ Arena::~Arena() {
     }
 
     delete[] field;
+
+    if (field == nullptr) exit(-2);
 }
 
 std::ostream& operator<<(std::ostream& out, const Arena& a) {

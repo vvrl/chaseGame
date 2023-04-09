@@ -19,7 +19,7 @@ struct PreyTest : public testing::Test {
 	}
 };
 
-
+//тест инициализации
 TEST_F(PreyTest, init_class) {
 
 	EXPECT_STREQ(prey->getName().c_str(), "Tester Sergey");

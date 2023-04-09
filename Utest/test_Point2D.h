@@ -5,7 +5,7 @@
 #include <string>
 
 
-
+// тест метода получения координат getX и getY
 TEST(TestPoint2D, TestConstuctor) {
 	int x[] = { -10, 67, 10, -1000, 0, 234412 };
 	int y[] = { -2, 217, 111, -1023, 0, 4412 };
@@ -25,7 +25,7 @@ TEST(TestPoint2D, TestConstuctor) {
 	}
 
 }
-
+// тест оператора сравнения ==
 TEST(TestPoint2D, TestEQcheck) {
 
 	int x[] = { -10, 67, 10, -1000, 0, 234412 };
@@ -56,7 +56,7 @@ TEST(TestPoint2D, TestEQcheck) {
 	}
 }
 
-//TODO: Написать тест для std::ostream& operator<<(std::ostream& out, const Point2D& point)
+// тест для std::ostream& operator<<(std::ostream& out, const Point2D& point)
 TEST(TestPoint2D, TestСonclusion) {
 
 	int x[] = { -10, 67, 10, -1000, 0, 234412 };
@@ -74,7 +74,7 @@ TEST(TestPoint2D, TestСonclusion) {
 			testing::internal::CaptureStdout();                                                    //CaptureStdout начинает захват из области stdout
 			std::cout << point1;
 			std::string output = testing::internal::GetCapturedStdout();                           //GetCapturedStdout останавливает захват из stdout и передает захваченную строку в переменную
-			EXPECT_EQ(output,s2);
+			ASSERT_EQ(output,s2);
 			
 		}
 	}
