@@ -1,6 +1,7 @@
-#include "Characters.h"
+#include "pch.h"
+#include "D:\VS\ChaseGame\Characters.h"
 #include <iostream>
-
+//utest
 using namespace std;
 
 Character::Character(const std::string& name, const Point2D& location, bool npcFlag)
@@ -58,10 +59,6 @@ Point2D Character::getLocation() {
 }
 
 bool Character::isNPC() { return npc; }
-
-
-
-
 
 
 Prey::Prey(const std::string& name, const Point2D& location, bool npcFlag) : Character(name, location, npcFlag) {   }

@@ -1,7 +1,8 @@
 #pragma once
-
+//#include "pch.h"
 
 #include "../Point2D.h"
+#include <string>
 
 
 
@@ -56,3 +57,27 @@ TEST(TestPoint2D, TestEQcheck) {
 }
 
 //TODO: Написать тест для std::ostream& operator<<(std::ostream& out, const Point2D& point)
+TEST(TestPoint2D, TestСonclusion) {
+
+	int x[] = { -10, 67, 10, -1000, 0, 234412 };
+	int y[] = { -2, 217, 111, -1023, 0, 4412 };
+
+	int x_size = sizeof(x) / sizeof(x[0]);
+	int y_size = sizeof(y) / sizeof(y[0]);
+
+	for (int i = 0; i < x_size - 1; i++)
+	{
+		for (int j = 0; j < y_size - 1; j++) {
+
+			Point2D point1(x[i], y[j]);
+			std::string s2 = "(" + std::to_string(x[i]) + ", " + std::to_string(y[j]) + ')';
+			testing::internal::CaptureStdout();                                                    //CaptureStdout начинает захват из области stdout
+			std::cout << point1;
+			std::string output = testing::internal::GetCapturedStdout();                           //GetCapturedStdout останавливает захват из stdout и передает захваченную строку в переменную
+			EXPECT_EQ(output,s2);
+			
+		}
+	}
+}
+
+
