@@ -43,7 +43,6 @@ int main() {
             cout << arena;
             system("chcp 65001");
             cout << "Хищник победил!" << endl;
-            arena.~Arena();
             return 0;
         }
 
@@ -56,6 +55,5 @@ int main() {
     }
     system("chcp 65001");
     cout << "Жертва победила" << endl;
-    arena.~Arena();
     return 0;
 }
