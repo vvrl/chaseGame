@@ -19,7 +19,7 @@ public:
 
     void clearStep();
     bool checkOverRun();
-    
+    bool checkPosition();
     ~Arena();
 
     friend std::ostream& operator<<(std::ostream&, const Arena&);

@@ -1,9 +1,30 @@
+#include <stdlib.h>
+#include <iostream>
 #include "Arena.h"
 
 Arena::Arena(int l, int w, Prey* prey, Predator* predator) : prey(prey), predator(predator) {
-    //TODO: Проверка диапазона l w от (1 до 99)       
-    length = l;
-    width = w;
+    //Проверка диапазона l w от (1 до 99)
+    if ((l < 0 || l > 100) || (w < 0 || w > 100)) {
+        std::cout << "Неверный размер арены \n" << std::endl;
+        exit(-1);
+    }
+    //Проверка на нахождение жертвы в пределах размера арены
+    else if (prey->getLocation().getX()>l || prey->getLocation().getY() > w) {
+        std::cout << "Жертва за пределами арены \n" << std::endl;
+        exit(-1);
+    }
+    //Проверка на нахождение хищника в пределах размера арены
+    else if (predator->getLocation().getX() > l || predator->getLocation().getY() > w) {
+        std::cout << "Хищник за пределами арены \n" << std::endl;
+        exit(-1);
+    }
+    else {
+        length = l;
+        width = w;
+    }
+         
+    /*length = l;
+    width = w;*/
 
     // увеличение размера поля для постоянных символов (границы, координаты)
     int shift_l = 3;
@@ -88,17 +109,26 @@ void Arena::clearStep() {
     field[view_length - predY][predX - 1] = ' ';
 }
 
+/*Изменены пороговые значения для проверки в методе checkOverRun (length и width изменены на view_length и view_width соответственно,
+а также минимальные значения изменены с 1 на 3 из-за наличия декоративных символов) */
+
 bool Arena::checkOverRun() {
     int preyX = (prey->getLocation().getX() * 2) + 2;
     int preyY = prey->getLocation().getY() + 2;
 
-    if (preyX > width || preyX < 1 || preyY > length || preyY < 1) return true;
+    if (preyX > view_width || preyX < 3 || preyY > view_length || preyY < 3) return true;
 
     int predX = (predator->getLocation().getX() * 2) + 2;
     int predY = predator->getLocation().getY() + 2;
 
-    if (predX > width || predX < 1 || predY > length || predY < 1) return true;
+    if (predX > view_width || predX < 3 || predY > view_length || predY < 3) return true;
 
+    return false;
+}
+
+ // Проверка на равенство позиций хищника и жертвы
+bool Arena::checkPosition() {
+    if (prey->getLocation() == predator->getLocation()) return true;
     return false;
 }
 

@@ -12,18 +12,19 @@ using namespace std;
 
 
 int main() {
-    system("chcp 65001");
+
+    system("chcp 1251");
 
     srand(time(NULL));
 
-    Prey prey("prey", Point2D(5, 20), true);
-    Predator predator("predator", Point2D(3, 10), true);
+    Prey prey("prey", Point2D(5, 8), false);
+    Predator predator("predator", Point2D(3, 9), false);
 
-    Arena arena(30, 30, &prey, &predator);
+    Arena arena(10, 10, &prey, &predator);
 
     cout << arena;
 
-    for (int i = 0; i <= 40; i++) {
+    for (int i = 0; i <= 10; i++) {
         arena.clearStep();
 
         Point2D prevPreyLocation(prey.getLocation());
@@ -38,14 +39,21 @@ int main() {
             predator.moveTo(prevPredLocation);
         }
 
+        if (arena.checkPosition()) {
+            cout << arena;
+            cout << "Хищник победил!" << endl;
+            return 0;
+        }
+
         
         cout << arena;
          
         system("timeout /t 1");
         
-        system("cls");
+        //system("cls");    //перезапись консоли
     }
     
+    cout << "Жертва победила" << endl;
 
     //
     //cout << "Enter a name for your prey: ";    

@@ -1,5 +1,5 @@
 #include "Characters.h"
-
+#include <iostream>
 
 using namespace std;
 
@@ -70,16 +70,16 @@ int Prey::askDirection() {
 
     do {
 
-        int direction(0);
-        cout << "Куда идти? \n";
-        cout << "0 - вверх, 1 - вправо, 2 - вниз, 3 - влево, \n";
-        cout << "4 - вверх - влево, 5 - вверх-вправо, 6 - вниз-вправо, 7 - вниз-влево \n";
+        int direction;
+        cout << "Куда идт и?  " << endl;
+        cout << "0 - вверх, 1 - вправо, 2 - вниз, 3 - влево  " << endl;
+        cout << "4 - вверх-влево, 5 - вверх-вправо, 6 - вниз-вправо, 7 - вниз-влево  " << endl;
         cin >> direction;
 
         if (direction <= 7 && direction >= 0) {
             return direction;
         }
-        else cout << "Некорректный ввод, попробуй ещё раз \n" << endl;
+        else cout << "Некоректный ввод, попробуй еще раз  " << endl;
 
     } while (true);
 
@@ -97,4 +97,53 @@ void Prey::autoMove() {
     }
 
     moveTo(direction, maxRange);
+}
+
+int Predator::askRange() {
+
+    do {
+        int range;
+        cout << "На сколько (1-5)  " << endl;
+        cin >> range;
+
+        if (range >= 1 && range <= maxRange) {
+            return range;
+        }
+        else cout << "Некоректный ввод, попробуй еще раз  " << endl;
+
+    } while (true);
+}
+
+int Predator::askDirection() {
+    do {
+
+        int direction(0);
+        cout << "Куда идти?  " << endl;
+        cout << "0 - вверх, 1 - вправо, 2 - вниз, 3 - влево  " << endl;
+        cin >> direction;
+
+        if (direction <= 3 && direction >= 0) {
+            return direction;
+        }
+        else cout << "Некоректный ввод, попробуй еще раз  " << endl;
+
+    } while (true);
+
+}
+
+void Predator::autoMove() {
+
+    int direction = 0;
+    int range = 0;
+
+    if (isNPC()) {
+        direction = rand() % 4;
+        range = rand() % 5 + 1;
+    }
+    else {
+        direction = askDirection();
+        range = askRange();
+    }
+
+    moveTo(direction, range);
 }
