@@ -25,22 +25,3 @@ public:
     friend std::ostream& operator<<(std::ostream&, const Arena&);
 
 };
-
-
-
-//bool check(const Prey& prey, const Predator& predator) {
-//
-//    if (prey.location.x == predator.location.x && abs(prey.location.y - predator.location.y) <= 5) {
-//        return 1;
-//    }
-//    else if (prey.location.y == predator.location.y && abs(prey.location.x - predator.location.x) <= 5) {
-//        return 1;
-//    }
-//    else return 0;
-//}
-//
-//
-//bool check1(const Prey& prey, const Predator& predator) {
-//    if ((prey.location.x == predator.location.x) && (prey.location.y == predator.location.y)) return 1;
-//    else return 0;
-//}
